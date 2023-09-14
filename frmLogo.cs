@@ -28,7 +28,13 @@ namespace pryArmanini_IE
                 frmLogin frm = new frmLogin();
                 frm.Show();
                 tiempo.Enabled = false;
+                
             }
+        }
+
+        private void frmLogo_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

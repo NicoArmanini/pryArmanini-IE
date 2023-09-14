@@ -16,12 +16,31 @@ namespace pryArmanini_IE
         {
             InitializeComponent();
         }
+
+
         int contador = 0;
         private void Hora_Tick(object sender, EventArgs e)
         {
-            contador += 1000;
-            toolFecha.Text = DateTime.Now.ToLongDateString();
-            toolHora.Text = Convert.ToString(DateTime.Now);
+            contador += 1;
+            if (contador > 1)
+            {
+                toolHora.Text = Convert.ToString(DateTime.Now);
+            }
+        }
+
+        private void toolHora_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void toolUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolProveedor_Click(object sender, EventArgs e)
+        {
+            frm
         }
     }
 }
