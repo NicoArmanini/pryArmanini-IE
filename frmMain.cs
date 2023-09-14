@@ -27,6 +27,15 @@ namespace pryArmanini_IE
                 toolHora.Text = Convert.ToString(DateTime.Now);
             }
         }
+        private void toolRegistro_Click(object sender, EventArgs e)
+        {
+            frmProveedor frm = new frmProveedor();
+            frm.ShowDialog();
+        }
+        private void toolProveedor_Click(object sender, EventArgs e)
+        {
+           
+        }
 
         private void toolHora_Click(object sender, EventArgs e)
         {
@@ -38,9 +47,10 @@ namespace pryArmanini_IE
 
         }
 
-        private void toolProveedor_Click(object sender, EventArgs e)
+        private void toolArchivo_Click(object sender, EventArgs e)
         {
-            frm
+            frmArchivo frm = new frmArchivo();
+            frm.ShowDialog();
         }
     }
 }

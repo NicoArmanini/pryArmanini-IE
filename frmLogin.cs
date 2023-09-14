@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,15 +32,27 @@ namespace pryArmanini_IE
             {
                 btnIniciar.Enabled = true;
             }
-
-
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            frmMain f = new frmMain();
-            f.Show();
+            StreamWriter AD = new StreamWriter("logInicio", false);
+
+            AD.WriteLine(txtUsuario.Text + "- Fecha -" + DateTime.Now);
+            AD.Close();
+
+            if (txtUsuario.Text == "1" && txtContrasenia.Text == "1")
+            {
+                this.Hide();
+                frmMain frm = new frmMain();
+                frm.toolHora.Text = txtUsuario.Text;
+                frm.ShowDialog();
+            }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
