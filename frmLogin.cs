@@ -36,13 +36,12 @@ namespace pryArmanini_IE
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            StreamWriter AD = new StreamWriter("logInicio", false);
-
-            AD.WriteLine(txtUsuario.Text + "- Fecha -" + DateTime.Now);
-            AD.Close();
-
             if (txtUsuario.Text == "1" && txtContrasenia.Text == "1")
             {
+                StreamWriter AD = new StreamWriter("logInicio", true);
+                AD.WriteLine(txtUsuario.Text + "- Fecha -" + DateTime.Now);
+                AD.Close();
+
                 this.Hide();
                 frmMain frm = new frmMain();
                 frm.toolHora.Text = txtUsuario.Text;

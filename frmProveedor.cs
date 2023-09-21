@@ -53,5 +53,10 @@ namespace pryArmanini_IE
             }
             lectorArchivo.Close();
         }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
