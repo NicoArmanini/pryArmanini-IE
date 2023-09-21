@@ -46,6 +46,7 @@ namespace pryArmanini_IE
                 frmMain frm = new frmMain();
                 frm.toolHora.Text = txtUsuario.Text;
                 frm.ShowDialog();
+
             }
         }
 
