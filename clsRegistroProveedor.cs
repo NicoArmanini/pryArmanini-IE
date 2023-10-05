@@ -10,7 +10,63 @@ namespace pryArmanini_IE
 {
     internal class clsRegistroProveedor
     {
-        public void Registrar(Int32 id, string entidad, DateTime apertura, int expediente, string juzg, string juri, string direccion, string liquidador)
+        // lee el archivo y carga en los cmb
+        public void CargarInfo(DataGridView grilla, ComboBox cmbJuzgado, ComboBox cmbJurisdiccion, ComboBox cmbLiquidador)
+        {
+            string archivoProveedor = "Listado de aseguradores.csv";
+
+            try
+            {
+
+                using (StreamReader sr = new StreamReader(archivoProveedor))
+                {
+                    string readLine = sr.ReadLine();
+                    if (readLine != null)
+                    {
+                        string[] separador = readLine.Split(';');
+
+                        // Utilizo HashSet para mantener una colección de valores únicos y
+                        // realizar operaciones de búsqueda y eliminación de manera eficiente
+                        HashSet<string> jurisdicciones = new HashSet<string>();
+                        HashSet<string> responsables = new HashSet<string>();
+                        HashSet<string> juzgados = new HashSet<string>();
+
+                        while (!sr.EndOfStream)
+                        {
+                            readLine = sr.ReadLine();
+                            separador = readLine.Split(';');
+                            grilla.Rows.Add(separador);
+
+                            juzgados.Add(separador[4]);
+                            jurisdicciones.Add(separador[5]);
+                            responsables.Add(separador[7]);
+
+                        }
+                        // agrego los datos a los cmb
+                        foreach (string jurisdiccion in jurisdicciones)
+                        {
+                            cmbJurisdiccion.Items.Add(jurisdiccion);
+                        }
+
+                        foreach (string juzgado in juzgados)
+                        {
+                            cmbJuzgado.Items.Add(juzgado);
+                        }
+
+                        foreach (string liquida in responsables)
+                        {
+                            cmbLiquidador.Items.Add(liquida);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error al cargar el archivo: " + ex.Message, "ERROR", MessageBoxButtons.OK);
+            }
+        }
+        public void Registrar(Int32 id, string entidad, string apertura, string expediente, string juzgado, string jurisdiccion, string direccion, string liquidador)
         {
             string archivoProveedor = "Listado de aseguradores.csv";
 
@@ -38,7 +94,7 @@ namespace pryArmanini_IE
                 // Verificar si el ID ya existe en la lista de IDs existentes
                 if (!idsExistentes.Contains(id))
                 {
-                    string nuevoRegistro = $"{id};{entidad};{apertura};{expediente};{juzg};{juri};{direccion};{liquidador}";
+                    string nuevoRegistro = $"{id};{entidad};{apertura};{expediente};{juzgado};{jurisdiccion};{direccion};{liquidador}";
 
                     using (StreamWriter sw = new StreamWriter(archivoProveedor, true))
                     {

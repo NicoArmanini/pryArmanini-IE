@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.treeViewArchivos = new System.Windows.Forms.TreeView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmArchivo));
+            this.rtbArchivos = new System.Windows.Forms.RichTextBox();
+            this.tvCarpeta = new System.Windows.Forms.TreeView();
             this.btnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // rtbArchivos
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(13, 247);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(451, 261);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            this.rtbArchivos.Location = new System.Drawing.Point(30, 251);
+            this.rtbArchivos.Margin = new System.Windows.Forms.Padding(4);
+            this.rtbArchivos.Name = "rtbArchivos";
+            this.rtbArchivos.Size = new System.Drawing.Size(451, 261);
+            this.rtbArchivos.TabIndex = 3;
+            this.rtbArchivos.Text = "";
             // 
-            // treeViewArchivos
+            // tvCarpeta
             // 
-            this.treeViewArchivos.Location = new System.Drawing.Point(13, 13);
-            this.treeViewArchivos.Margin = new System.Windows.Forms.Padding(4);
-            this.treeViewArchivos.Name = "treeViewArchivos";
-            this.treeViewArchivos.Size = new System.Drawing.Size(451, 226);
-            this.treeViewArchivos.TabIndex = 2;
+            this.tvCarpeta.Location = new System.Drawing.Point(30, 17);
+            this.tvCarpeta.Margin = new System.Windows.Forms.Padding(4);
+            this.tvCarpeta.Name = "tvCarpeta";
+            this.tvCarpeta.Size = new System.Drawing.Size(451, 226);
+            this.tvCarpeta.TabIndex = 2;
+            this.tvCarpeta.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvCarpeta_AfterSelect_1);
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(370, 515);
+            this.btnSalir.Location = new System.Drawing.Point(387, 519);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(92, 34);
             this.btnSalir.TabIndex = 4;
@@ -64,20 +66,24 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 554);
+            this.BackgroundImage = global::pryArmanini_IE.Properties.Resources.fondo;
+            this.ClientSize = new System.Drawing.Size(508, 554);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.treeViewArchivos);
+            this.Controls.Add(this.rtbArchivos);
+            this.Controls.Add(this.tvCarpeta);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmArchivo";
-            this.Text = "Archivo";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Archivos";
+            this.Load += new System.EventHandler(this.frmArchivo_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TreeView treeViewArchivos;
+        private System.Windows.Forms.RichTextBox rtbArchivos;
+        private System.Windows.Forms.TreeView tvCarpeta;
         private System.Windows.Forms.Button btnSalir;
     }
 }

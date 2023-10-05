@@ -29,23 +29,25 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolGestion = new System.Windows.Forms.ToolStripMenuItem();
             this.toolProveedor = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolRegistro = new System.Windows.Forms.ToolStripMenuItem();
             this.toolListado = new System.Windows.Forms.ToolStripMenuItem();
             this.toolListaProveedores = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolArchivo = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolHora = new System.Windows.Forms.ToolStripStatusLabel();
             this.Hora = new System.Windows.Forms.Timer(this.components);
-            this.toolRegistro = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolArchivo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolGestion,
@@ -74,6 +76,13 @@
             this.toolProveedor.Text = "Proveedor";
             this.toolProveedor.Click += new System.EventHandler(this.toolProveedor_Click);
             // 
+            // toolRegistro
+            // 
+            this.toolRegistro.Name = "toolRegistro";
+            this.toolRegistro.Size = new System.Drawing.Size(233, 26);
+            this.toolRegistro.Text = "Registro Proveedores";
+            this.toolRegistro.Click += new System.EventHandler(this.toolRegistro_Click);
+            // 
             // toolListado
             // 
             this.toolListado.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -87,11 +96,20 @@
             this.toolListaProveedores.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolArchivo});
             this.toolListaProveedores.Name = "toolListaProveedores";
-            this.toolListaProveedores.Size = new System.Drawing.Size(224, 26);
+            this.toolListaProveedores.Size = new System.Drawing.Size(208, 26);
             this.toolListaProveedores.Text = "Lista Proveedores";
+            // 
+            // toolArchivo
+            // 
+            this.toolArchivo.Name = "toolArchivo";
+            this.toolArchivo.Size = new System.Drawing.Size(142, 26);
+            this.toolArchivo.Text = "Archivo";
+            this.toolArchivo.Click += new System.EventHandler(this.toolArchivo_Click);
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.statusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolUsuario,
@@ -127,27 +145,16 @@
             this.Hora.Interval = 1;
             this.Hora.Tick += new System.EventHandler(this.Hora_Tick);
             // 
-            // toolRegistro
-            // 
-            this.toolRegistro.Name = "toolRegistro";
-            this.toolRegistro.Size = new System.Drawing.Size(233, 26);
-            this.toolRegistro.Text = "Registro Proveedores";
-            this.toolRegistro.Click += new System.EventHandler(this.toolRegistro_Click);
-            // 
-            // toolArchivo
-            // 
-            this.toolArchivo.Name = "toolArchivo";
-            this.toolArchivo.Size = new System.Drawing.Size(224, 26);
-            this.toolArchivo.Text = "Archivo";
-            this.toolArchivo.Click += new System.EventHandler(this.toolArchivo_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::pryArmanini_IE.Properties.Resources.fondo;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(957, 450);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

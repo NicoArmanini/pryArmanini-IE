@@ -36,17 +36,38 @@ namespace pryArmanini_IE
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            if (txtUsuario.Text == "1" && txtContrasenia.Text == "1")
+            StreamWriter AD = new StreamWriter("logInicio", true);
+            AD.WriteLine(txtUsuario.Text + "- Fecha -" + DateTime.Now);
+            AD.Close();
+
+            int contador = 0;
+
+            if (contador < 3)
             {
-                StreamWriter AD = new StreamWriter("logInicio", true);
-                AD.WriteLine(txtUsuario.Text + "- Fecha -" + DateTime.Now);
-                AD.Close();
-
-                this.Hide();
-                frmMain frm = new frmMain();
-                frm.toolHora.Text = txtUsuario.Text;
-                frm.ShowDialog();
-
+                if (txtUsuario.Text == "admin" && txtContrasenia.Text == "123")
+                {
+                    this.Hide();
+                    frmMain f = new frmMain();
+                    f.Show();
+                }
+                else if (txtUsuario.Text == "guest" && txtContrasenia.Text == "123")
+                {
+                    this.Hide();
+                    frmMain f = new frmMain();
+                    f.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario y/o contraseña incorrectos.", "ERROR", MessageBoxButtons.OK);
+                    txtUsuario.Text = "";
+                    txtContrasenia.Text = "";
+                    contador++;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ha alcanzado el límite de intentos incorrectos. El formulario se cerrará.", "ERROR", MessageBoxButtons.OK);
+                this.Close();
             }
         }
 

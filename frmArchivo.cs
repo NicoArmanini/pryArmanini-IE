@@ -17,9 +17,7 @@ namespace pryArmanini_IE
         public frmArchivo()
         {
             InitializeComponent();
-            string rootFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "datosProveedor.txt");
-
-            PopulateTreeView(treeViewArchivos, rootFolderPath);
+            
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -27,72 +25,81 @@ namespace pryArmanini_IE
             this.Close();
         }
 
-        private void PopulateTreeView(System.Windows.Forms.TreeView treeView, string folderPath)
+        // tuve problemas con traer el archivo al treeView y desplegar las carpetas, le prregunte a chatGPT como podia hacer
+        // y despues de varias preguntas me tiro este nuevo codigo mas simple y funcional, asique lo cambie
+
+        private void tvCarpeta_AfterSelect_1(object sender, TreeViewEventArgs e)
         {
-            DirectoryInfo rootDirectory = new DirectoryInfo(folderPath);
+            TreeNode selectedNode = e.Node;
 
-            // Limpia el TreeView antes de volver a llenarlo.
-            treeView.Nodes.Clear();
+            // verifica que el nodo seleccionado sea un archivo y no una carpeta
+            if (selectedNode.Tag != null)
+            {
+                string archivoSeleccionado = selectedNode.Tag.ToString(); // Obtiene la ruta completa del archivo
 
-            // Agrega el nodo raíz al TreeView.
-            TreeNode rootNode = new TreeNode(rootDirectory.Name);
-            treeView.Nodes.Add(rootNode);
+                try
+                {
+                    // Lee el contenido del archivo
+                    string contenido = File.ReadAllText(archivoSeleccionado);
 
-            // Llama a una función auxiliar para llenar los subnodos.
-            PopulateDirectory(rootDirectory, rootNode);
+                    rtbArchivos.Visible = true;
+                    // Muestra el contenido en el RichTextBox
+                    rtbArchivos.Text = contenido;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al abrir el archivo: " + ex.Message);
+                }
+            }
+            else
+            {
+                rtbArchivos.Text = "";
+            }
         }
 
-        private void PopulateDirectory(DirectoryInfo directory, TreeNode parentNode)
+        private void frmArchivo_Load(object sender, EventArgs e)
+        {
+            string rutaBase = AppDomain.CurrentDomain.BaseDirectory;
+            string carpetaProveedores = "Proveedores";
+
+            string rutaCompleta = Path.Combine(rutaBase, carpetaProveedores);
+            // Agrega la carpeta principal al árbol
+            TreeNode rootNode = new TreeNode("Carpetas y Archivos del Proyecto");
+            tvCarpeta.Nodes.Add(rootNode);
+
+            // Agrega carpetas y archivos por recursividad
+            AgregarArchivos(rootNode, rutaCompleta);
+        }
+        
+        private void AgregarArchivos(TreeNode parentNode, string ruta)
         {
             try
             {
-                // Tu código para acceder a la carpeta "Proveedores" aquí
-                foreach (DirectoryInfo subDirectory in directory.GetDirectories())
+                // Obtiene las carpetas y los archivos en la ruta
+                string[] carpetas = Directory.GetDirectories(ruta);
+                string[] archivos = Directory.GetFiles(ruta);
+
+                // Agrega las carpetas al nodo
+                foreach (string nombrecarpeta in carpetas)
                 {
-                    // Agrega un nodo para cada subdirectorio.
-                    TreeNode directoryNode = new TreeNode(subDirectory.Name);
-                    parentNode.Nodes.Add(directoryNode);
+                    TreeNode carpetaNode = new TreeNode(Path.GetFileName(nombrecarpeta));
+                    parentNode.Nodes.Add(carpetaNode);
 
-                    // Llama recursivamente a esta función para explorar los subdirectorios.
-                    PopulateDirectory(subDirectory, directoryNode);
+                    // Agrega carpetas y archivos dentro de esta carpeta
+                    AgregarArchivos(carpetaNode, nombrecarpeta);
+                }
 
-                    // Ahora, agrega los archivos en este directorio al nodo del directorio.
-                    foreach (FileInfo file in subDirectory.GetFiles())
-                    {
-                        TreeNode fileNode = new TreeNode(file.Name);
-                        fileNode.Tag = file.FullName; // Almacena la ruta del archivo como Tag
-                        directoryNode.Nodes.Add(fileNode);
-                    }
+                // Agregar archivos al nodo actual
+                foreach (string nombreArchivo in archivos)
+                {
+                    TreeNode archivoNode = new TreeNode(Path.GetFileName(nombreArchivo));
+                    archivoNode.Tag = nombreArchivo; // Almacena la ruta completa del archivo como un valor asociado
+                    parentNode.Nodes.Add(archivoNode);
                 }
             }
-            catch (System.IO.DirectoryNotFoundException ex)
+            catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
-                // Manejar el error de acuerdo a tus necesidades
-            }
-            
-        }
-
-        private void treeViewArchivos_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            // Verifica si el nodo seleccionado tiene una ruta de archivo adjunta.
-            if (e.Node.Tag is string filePath)
-            {
-                if (File.Exists(filePath) && filePath.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
-                {
-                    try
-                    {
-                        // Lee el contenido del archivo de texto y muéstralo.
-                        string fileContent = File.ReadAllText(filePath);
-
-                        // Puedes mostrar el contenido en un control TextBox o RichTextBox, por ejemplo.
-                        richTextBox1.Text = fileContent;
-                    }
-                    catch (IOException ex)
-                    {
-                        MessageBox.Show($"Error al leer el archivo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
     }
