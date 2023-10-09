@@ -13,7 +13,7 @@ namespace pryArmanini_IE
         // lee el archivo y carga en los cmb
         public void CargarInfo(DataGridView grilla, ComboBox cmbJuzgado, ComboBox cmbJurisdiccion, ComboBox cmbLiquidador)
         {
-            string archivoProveedor = "Listado de aseguradores.csv";
+            string archivoProveedor = "ListadoProveedores.csv";
 
             try
             {
@@ -25,21 +25,22 @@ namespace pryArmanini_IE
                     {
                         string[] separador = readLine.Split(';');
 
-                        // Utilizo HashSet para mantener una colección de valores únicos y
-                        // realizar operaciones de búsqueda y eliminación de manera eficiente
+                        // HashSet para cargar los combo
                         HashSet<string> jurisdicciones = new HashSet<string>();
                         HashSet<string> responsables = new HashSet<string>();
                         HashSet<string> juzgados = new HashSet<string>();
 
                         while (!sr.EndOfStream)
                         {
-                            readLine = sr.ReadLine();
+                            
                             separador = readLine.Split(';');
                             grilla.Rows.Add(separador);
 
                             juzgados.Add(separador[4]);
                             jurisdicciones.Add(separador[5]);
                             responsables.Add(separador[7]);
+
+                            readLine = sr.ReadLine();
 
                         }
                         // agrego los datos a los cmb

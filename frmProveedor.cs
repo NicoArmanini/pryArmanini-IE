@@ -43,6 +43,7 @@ namespace pryArmanini_IE
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            //declaro variables 
             int numero = Convert.ToInt32(txtN.Text);
             string entidad = cmbEntidad.Text;
             string apertura = dtpFecha.Value.ToShortDateString();
@@ -51,7 +52,6 @@ namespace pryArmanini_IE
             string juris = cmbJurisdiccion.Text;
             string liquidador = cmbLiquidador.Text;
             string direccion = cmbDireccion.Text;
-
 
             try
             {

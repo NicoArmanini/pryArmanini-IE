@@ -52,5 +52,10 @@ namespace pryArmanini_IE
             frmArchivo frm = new frmArchivo();
             frm.ShowDialog();
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
