@@ -36,7 +36,11 @@ namespace pryArmanini_IE
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            StreamWriter AD = new StreamWriter("logInicio", true);
+            clsUsuarios objValidaUsuarios = new clsUsuarios();
+            objValidaUsuarios.conectarBD();
+            lblTitulo.Text = objValidaUsuarios.estadoConexion;
+
+            StreamWriter AD = new StreamWriter("logInicio", false);
             AD.WriteLine(txtUsuario.Text + "- Fecha -" + DateTime.Now);
             AD.Close();
 
@@ -44,25 +48,48 @@ namespace pryArmanini_IE
 
             if (contador < 3)
             {
-                if (txtUsuario.Text == "admin" && txtContrasenia.Text == "123")
+                clsUsuarios usuario = new clsUsuarios();
+                if (usuario.ValidarUsuario(txtUsuario.Text, txtContrasenia.Text))
                 {
-                    this.Hide();
-                    frmMain f = new frmMain();
-                    f.Show();
+                    if (txtUsuario.Text == "admin" && txtContrasenia.Text == "123")
+                    {
+                        this.Hide();
+                        frmMain f = new frmMain();
+                        f.Show();
+                    }
+                    else if (txtUsuario.Text == "guest" && txtContrasenia.Text == "123")
+                    {
+                        this.Hide();
+                        frmMain f = new frmMain();
+                        f.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usuario y/o contraseña incorrectos.", "ERROR", MessageBoxButtons.OK);
+                        txtUsuario.Text = "";
+                        txtContrasenia.Text = "";
+                        contador++;
+                    }
                 }
-                else if (txtUsuario.Text == "guest" && txtContrasenia.Text == "123")
-                {
-                    this.Hide();
-                    frmMain f = new frmMain();
-                    f.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Usuario y/o contraseña incorrectos.", "ERROR", MessageBoxButtons.OK);
-                    txtUsuario.Text = "";
-                    txtContrasenia.Text = "";
-                    contador++;
-                }
+                //if (txtUsuario.Text == "admin" && txtContrasenia.Text == "123")
+                //{
+                //    this.Hide();
+                //    frmMain f = new frmMain();
+                //    f.Show();
+                //}
+                //else if (txtUsuario.Text == "guest" && txtContrasenia.Text == "123")
+                //{
+                //    this.Hide();
+                //    frmMain f = new frmMain();
+                //    f.Show();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Usuario y/o contraseña incorrectos.", "ERROR", MessageBoxButtons.OK);
+                //    txtUsuario.Text = "";
+                //    txtContrasenia.Text = "";
+                //    contador++;
+                //}
             }
             else
             {

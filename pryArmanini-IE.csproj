@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="clsLogin.cs" />
     <Compile Include="clsRegistroProveedor.cs" />
+    <Compile Include="clsUsuarios.cs" />
     <Compile Include="frmArchivo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +106,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Logs\BaseDatosLogs.laccdb" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -123,6 +125,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fondo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logs\BaseDatosLogs.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
