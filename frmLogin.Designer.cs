@@ -145,10 +145,10 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.TextBox txtContrasenia;
-        private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Label lblContraseña;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Button btnSalir;
+        public System.Windows.Forms.TextBox txtUsuario;
     }
 }
 

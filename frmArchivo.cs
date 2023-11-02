@@ -20,11 +20,6 @@ namespace pryArmanini_IE
             
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         // tuve problemas con traer el archivo al treeView y desplegar las carpetas, le prregunte a chatGPT como podia hacer
         // y despues de varias preguntas me tiro este nuevo codigo mas simple y funcional, asique lo cambie
 
@@ -59,15 +54,13 @@ namespace pryArmanini_IE
 
         private void frmArchivo_Load(object sender, EventArgs e)
         {
-            string rutaBase = AppDomain.CurrentDomain.BaseDirectory;
-            string carpetaProveedores = "Proveedores";
+            string rutaCompleta = @"../../Proveedores";
 
-            string rutaCompleta = Path.Combine(rutaBase, carpetaProveedores);
-            // Agrega la carpeta principal al árbol
+            // Agregar la carpeta principal al árbol
             TreeNode rootNode = new TreeNode("Carpetas y Archivos del Proyecto");
             tvCarpeta.Nodes.Add(rootNode);
 
-            // Agrega carpetas y archivos por recursividad
+            // Llamamos a un método recursivo para agregar carpetas y archivos
             AgregarArchivos(rootNode, rutaCompleta);
         }
         
@@ -101,6 +94,21 @@ namespace pryArmanini_IE
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            string Usuario = clsUsuarios.Usuario;
+            DateTime fecha = DateTime.Now;
+            string Accion = "Pagina Principal";
+
+            clsUsuarios registro = new clsUsuarios();
+            registro.CargaLog(Usuario, fecha, Accion);
+
+            frmMain frm = new frmMain();
+
+            frm.Show();
+            this.Hide();
         }
     }
 }

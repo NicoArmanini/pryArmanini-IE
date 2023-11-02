@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
 using System.Windows.Forms;
+using System.IO;
+using System.Drawing;
 
 namespace pryArmanini_IE
 {
     internal class clsUsuarios
     {
         public string Nombre { get; set; }
+        public static string Usuario { get; set; }
 
         OleDbConnection conexionBD;
         OleDbCommand comandoBD;
@@ -36,9 +39,8 @@ namespace pryArmanini_IE
                 conexionBD.Open();
                 estadoConexion = "ABIERTO";
             }
-            catch (Exception error)
-            {
-
+            catch (Exception error) 
+            { 
                 estadoConexion = error.Message;
             }
         }
@@ -76,6 +78,94 @@ namespace pryArmanini_IE
                     return false;
                 }
             }
+        }
+
+        public void CargaLog(string Usuario, DateTime Fecha, string Accion)
+        {
+            try
+            {
+                using (OleDbConnection connection = new OleDbConnection(cadenaConexion))
+                {
+                    connection.Open();
+
+                    string query = "INSERT INTO Logs (Usuario, FechaHora, Accion) VALUES (@Usuario, @Fecha, @Accion)";
+
+                    using (OleDbCommand command = new OleDbCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Usuario", Usuario);
+                        command.Parameters.AddWithValue("@Fecha", Fecha);
+                        command.Parameters.AddWithValue("@Accion", Accion);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);//informar el error por pantalla
+            }
+        }
+
+        public void AgregarUsuario(string usuario, string contrasenia, bool permisoProv, Image firma)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    // Convertir la firma en bytes
+                    byte[] firmaBytes;
+                    using (MemoryStream m = new MemoryStream())
+                    {
+                        firma.Save(m, System.Drawing.Imaging.ImageFormat.Png); //seleccionamos el formato 
+                        firmaBytes = m.ToArray();
+                    }
+
+                    // Insertar los datos en la base de datos
+                    string Query = "INSERT INTO Usuarios (User, Contrasenia, PermisoProv, PermisoActiv, Firma) VALUES (@User, @Contrasena, @PermisoProv, @PermisoActiv, @Firma)";
+
+                    using (OleDbCommand cmd = new OleDbCommand(Query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@User", usuario);
+                        cmd.Parameters.AddWithValue("@Contrasenia", contrasenia);
+                        cmd.Parameters.AddWithValue("@PermisoProv", permisoProv);
+                        cmd.Parameters.AddWithValue("@Firma", firmaBytes);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public bool[] ObtenerPermisos(string usuarios)
+        {
+            bool[] permisos = new bool[1]; // permisos en la base
+
+            using (OleDbConnection connection = new OleDbConnection(cadenaConexion))
+            {
+                connection.Open();
+
+                string query = "SELECT IIF(permisoProv=true, 1, 0) AS permisoProv FROM Usuarios WHERE username = @Username";
+                using (OleDbCommand command = new OleDbCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", usuarios);
+
+                    using (OleDbDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            permisos[0] = Convert.ToInt32(reader["permisoProv"]) == 1;
+                        }
+                    }
+                }
+            }
+
+            return permisos;
         }
     }
 }

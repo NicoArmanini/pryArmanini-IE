@@ -12,9 +12,12 @@ namespace pryArmanini_IE
 {
     public partial class frmMain : Form
     {
+        private string usuario;
         public frmMain()
         {
             InitializeComponent();
+            InitializeComponent();
+            this.usuario = usuario;
         }
 
 
@@ -26,11 +29,21 @@ namespace pryArmanini_IE
             {
                 toolHora.Text = Convert.ToString(DateTime.Now);
             }
+            toolUser.Text = clsUsuarios.Usuario;
         }
-        private void toolRegistro_Click(object sender, EventArgs e)
+        private void toolRegistroProveedores_Click(object sender, EventArgs e)
         {
+            string Usuario = clsUsuarios.Usuario;
+            DateTime fecha = DateTime.Now;
+            string Accion = toolRegistroProveedores.Text;
+
+            clsUsuarios registro = new clsUsuarios();
+            registro.CargaLog(Usuario, fecha, Accion);
+
             frmProveedor frm = new frmProveedor();
-            frm.ShowDialog();
+
+            frm.Show();
+            this.Hide();
         }
         private void toolProveedor_Click(object sender, EventArgs e)
         {
@@ -49,13 +62,53 @@ namespace pryArmanini_IE
 
         private void toolArchivo_Click(object sender, EventArgs e)
         {
+            string Usuario = clsUsuarios.Usuario;
+            DateTime fecha = DateTime.Now;
+            string Accion = toolArchivo.Text;
+
+            clsUsuarios registro = new clsUsuarios();
+            registro.CargaLog(Usuario, fecha, Accion);
+
             frmArchivo frm = new frmArchivo();
-            frm.ShowDialog();
+
+            frm.Show();
+            this.Hide();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            frmLogin frm = new frmLogin();
+            clsUsuarios lectorPermisos = new clsUsuarios();
 
+            bool[] permisos = lectorPermisos.ObtenerPermisos(frm.txtUsuario.Text);
+            bool tienePermiso = permisos.Any(p => p);
+
+            if (tienePermiso)
+            {
+                // Habilita el botón
+                toolGestion.Enabled = true;
+                toolUsuario.Enabled = true;
+            }
+            else
+            {
+                toolGestion.Enabled = false;
+                toolUsuario.Enabled = false;
+            }
+        }
+
+        private void toolRegistroUser_Click(object sender, EventArgs e)
+        {
+            string Usuario = clsUsuarios.Usuario;
+            DateTime fecha = DateTime.Now;
+            string Accion = toolRegistroUser.Text;
+
+            clsUsuarios registro = new clsUsuarios();
+            registro.CargaLog(Usuario, fecha, Accion);
+
+            frmRegistroUsuario frm = new frmRegistroUsuario();
+
+            frm.Show();
+            //this.Hide();
         }
     }
 }

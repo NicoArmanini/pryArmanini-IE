@@ -34,11 +34,13 @@
             this.cmbLiquidador = new System.Windows.Forms.ComboBox();
             this.cmbDireccion = new System.Windows.Forms.ComboBox();
             this.cmbEntidad = new System.Windows.Forms.ComboBox();
+            this.cmbJurisdiccion = new System.Windows.Forms.ComboBox();
             this.cmbJusgado = new System.Windows.Forms.ComboBox();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.txtExpediente = new System.Windows.Forms.TextBox();
             this.txtN = new System.Windows.Forms.TextBox();
             this.lblLiquidador = new System.Windows.Forms.Label();
+            this.lblJurisdiccion = new System.Windows.Forms.Label();
             this.lblDireccion = new System.Windows.Forms.Label();
             this.lblJusgado = new System.Windows.Forms.Label();
             this.lblExpediente = new System.Windows.Forms.Label();
@@ -48,11 +50,9 @@
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.dgvTabla = new System.Windows.Forms.DataGridView();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.lblJurisdiccion = new System.Windows.Forms.Label();
-            this.cmbJurisdiccion = new System.Windows.Forms.ComboBox();
             this.mrcDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
             this.SuspendLayout();
@@ -60,16 +60,18 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
+            this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(188, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(241, 9);
             this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(543, 42);
+            this.lblTitulo.Size = new System.Drawing.Size(549, 42);
             this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Registrar datos del Proveedor";
+            this.lblTitulo.Text = "Registrar Datos del Proveedor";
             // 
             // mrcDatos
             // 
+            this.mrcDatos.BackColor = System.Drawing.Color.Transparent;
             this.mrcDatos.Controls.Add(this.cmbLiquidador);
             this.mrcDatos.Controls.Add(this.cmbDireccion);
             this.mrcDatos.Controls.Add(this.cmbEntidad);
@@ -87,9 +89,9 @@
             this.mrcDatos.Controls.Add(this.lblEntidad);
             this.mrcDatos.Controls.Add(this.lblN);
             this.mrcDatos.Location = new System.Drawing.Point(27, 81);
-            this.mrcDatos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mrcDatos.Margin = new System.Windows.Forms.Padding(4);
             this.mrcDatos.Name = "mrcDatos";
-            this.mrcDatos.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mrcDatos.Padding = new System.Windows.Forms.Padding(4);
             this.mrcDatos.Size = new System.Drawing.Size(828, 249);
             this.mrcDatos.TabIndex = 1;
             this.mrcDatos.TabStop = false;
@@ -99,7 +101,7 @@
             // 
             this.cmbLiquidador.FormattingEnabled = true;
             this.cmbLiquidador.Location = new System.Drawing.Point(594, 198);
-            this.cmbLiquidador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbLiquidador.Margin = new System.Windows.Forms.Padding(4);
             this.cmbLiquidador.Name = "cmbLiquidador";
             this.cmbLiquidador.Size = new System.Drawing.Size(216, 24);
             this.cmbLiquidador.TabIndex = 15;
@@ -108,7 +110,7 @@
             // 
             this.cmbDireccion.FormattingEnabled = true;
             this.cmbDireccion.Location = new System.Drawing.Point(594, 145);
-            this.cmbDireccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbDireccion.Margin = new System.Windows.Forms.Padding(4);
             this.cmbDireccion.Name = "cmbDireccion";
             this.cmbDireccion.Size = new System.Drawing.Size(216, 24);
             this.cmbDireccion.TabIndex = 15;
@@ -117,16 +119,25 @@
             // 
             this.cmbEntidad.FormattingEnabled = true;
             this.cmbEntidad.Location = new System.Drawing.Point(131, 95);
-            this.cmbEntidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbEntidad.Margin = new System.Windows.Forms.Padding(4);
             this.cmbEntidad.Name = "cmbEntidad";
             this.cmbEntidad.Size = new System.Drawing.Size(258, 24);
             this.cmbEntidad.TabIndex = 15;
+            // 
+            // cmbJurisdiccion
+            // 
+            this.cmbJurisdiccion.FormattingEnabled = true;
+            this.cmbJurisdiccion.Location = new System.Drawing.Point(594, 100);
+            this.cmbJurisdiccion.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbJurisdiccion.Name = "cmbJurisdiccion";
+            this.cmbJurisdiccion.Size = new System.Drawing.Size(216, 24);
+            this.cmbJurisdiccion.TabIndex = 15;
             // 
             // cmbJusgado
             // 
             this.cmbJusgado.FormattingEnabled = true;
             this.cmbJusgado.Location = new System.Drawing.Point(594, 54);
-            this.cmbJusgado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbJusgado.Margin = new System.Windows.Forms.Padding(4);
             this.cmbJusgado.Name = "cmbJusgado";
             this.cmbJusgado.Size = new System.Drawing.Size(216, 24);
             this.cmbJusgado.TabIndex = 15;
@@ -134,7 +145,7 @@
             // dtpFecha
             // 
             this.dtpFecha.Location = new System.Drawing.Point(131, 153);
-            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFecha.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(258, 22);
             this.dtpFecha.TabIndex = 14;
@@ -142,7 +153,7 @@
             // txtExpediente
             // 
             this.txtExpediente.Location = new System.Drawing.Point(131, 197);
-            this.txtExpediente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtExpediente.Margin = new System.Windows.Forms.Padding(4);
             this.txtExpediente.Name = "txtExpediente";
             this.txtExpediente.Size = new System.Drawing.Size(258, 22);
             this.txtExpediente.TabIndex = 10;
@@ -150,7 +161,7 @@
             // txtN
             // 
             this.txtN.Location = new System.Drawing.Point(131, 42);
-            this.txtN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtN.Margin = new System.Windows.Forms.Padding(4);
             this.txtN.Name = "txtN";
             this.txtN.Size = new System.Drawing.Size(258, 22);
             this.txtN.TabIndex = 7;
@@ -164,6 +175,16 @@
             this.lblLiquidador.Size = new System.Drawing.Size(156, 16);
             this.lblLiquidador.TabIndex = 6;
             this.lblLiquidador.Text = "Liquidador Responsable";
+            // 
+            // lblJurisdiccion
+            // 
+            this.lblJurisdiccion.AutoSize = true;
+            this.lblJurisdiccion.Location = new System.Drawing.Point(434, 100);
+            this.lblJurisdiccion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblJurisdiccion.Name = "lblJurisdiccion";
+            this.lblJurisdiccion.Size = new System.Drawing.Size(78, 16);
+            this.lblJurisdiccion.TabIndex = 4;
+            this.lblJurisdiccion.Text = "Jurisdiccion";
             // 
             // lblDireccion
             // 
@@ -229,7 +250,7 @@
             // 
             this.btnRegistrar.BackColor = System.Drawing.Color.Lime;
             this.btnRegistrar.Location = new System.Drawing.Point(863, 83);
-            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(113, 57);
             this.btnRegistrar.TabIndex = 2;
@@ -241,45 +262,49 @@
             // 
             this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnModificar.Location = new System.Drawing.Point(863, 142);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(113, 57);
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
             this.btnEliminar.BackColor = System.Drawing.Color.Red;
             this.btnEliminar.Location = new System.Drawing.Point(863, 201);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(113, 57);
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // btnCancelar
+            // btnLimpiar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnCancelar.Location = new System.Drawing.Point(863, 291);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(113, 39);
-            this.btnCancelar.TabIndex = 5;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnLimpiar.Location = new System.Drawing.Point(863, 291);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(113, 39);
+            this.btnLimpiar.TabIndex = 5;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // dgvTabla
             // 
             this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTabla.Location = new System.Drawing.Point(27, 338);
-            this.dgvTabla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvTabla.Margin = new System.Windows.Forms.Padding(4);
             this.dgvTabla.Name = "dgvTabla";
             this.dgvTabla.RowHeadersWidth = 51;
             this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTabla.Size = new System.Drawing.Size(949, 266);
             this.dgvTabla.TabIndex = 6;
+            this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
             // 
             // btnSalir
             // 
@@ -292,40 +317,22 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // lblJurisdiccion
-            // 
-            this.lblJurisdiccion.AutoSize = true;
-            this.lblJurisdiccion.Location = new System.Drawing.Point(434, 100);
-            this.lblJurisdiccion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblJurisdiccion.Name = "lblJurisdiccion";
-            this.lblJurisdiccion.Size = new System.Drawing.Size(78, 16);
-            this.lblJurisdiccion.TabIndex = 4;
-            this.lblJurisdiccion.Text = "Jurisdiccion";
-            // 
-            // cmbJurisdiccion
-            // 
-            this.cmbJurisdiccion.FormattingEnabled = true;
-            this.cmbJurisdiccion.Location = new System.Drawing.Point(594, 100);
-            this.cmbJurisdiccion.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbJurisdiccion.Name = "cmbJurisdiccion";
-            this.cmbJurisdiccion.Size = new System.Drawing.Size(216, 24);
-            this.cmbJurisdiccion.TabIndex = 15;
-            // 
             // frmProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::pryArmanini_IE.Properties.Resources.fondo;
             this.ClientSize = new System.Drawing.Size(1007, 650);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.dgvTabla);
-            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.mrcDatos);
             this.Controls.Add(this.lblTitulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmProveedor";
             this.Text = "Registro de Provedor";
             this.Load += new System.EventHandler(this.frmProveedor_Load);
@@ -353,7 +360,7 @@
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.DataGridView dgvTabla;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ComboBox cmbJusgado;

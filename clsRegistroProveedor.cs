@@ -13,7 +13,7 @@ namespace pryArmanini_IE
         // lee el archivo y carga en los cmb
         public void CargarInfo(DataGridView grilla, ComboBox cmbJuzgado, ComboBox cmbJurisdiccion, ComboBox cmbLiquidador)
         {
-            string archivoProveedor = "ListadoProveedores.csv";
+            string archivoProveedor = "Listado de aseguradores.csv";
 
             try
             {
@@ -111,6 +111,104 @@ namespace pryArmanini_IE
             {
                 MessageBox.Show("Error al cargar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }   
+        }
+
+        public void Modificar(int id, string entidad, string apertura, string expediente, string juzg, string juri, string direccion, string liquidador)
+        {
+            string archivoProveedor = @"../../Broker/Listado de aseguradores.csv";
+
+            try
+            {
+                List<string> lineas = new List<string>();
+                bool primerLinea = true;
+
+                using (StreamReader lector = new StreamReader(archivoProveedor))
+                {
+                    string readLine;
+                    while ((readLine = lector.ReadLine()) != null)
+                    {
+                        string[] separador = readLine.Split(';');
+
+                        if (separador.Length > 0 && int.TryParse(separador[0], out int existingID))
+                        {
+                            if (existingID == id)
+                            {
+                                string nuevaLinea = $"{id};{entidad};{apertura};{expediente};{juzg};{juri};{direccion};{liquidador}";
+                                lineas.Add(nuevaLinea);
+                            }
+                            else
+                            {
+                                lineas.Add(readLine);
+                            }
+                        }
+                    }
+                }
+
+                // Escribe las líneas en el archivo original
+                using (StreamWriter sw = new StreamWriter(archivoProveedor, false))
+                {
+                    foreach (string linea in lineas)
+                    {
+                        // Agregar la primera línea con los títulos de las columnas
+                        if (primerLinea)
+                        {
+                            sw.WriteLine(linea);
+                            primerLinea = false;
+                        }
+                        else
+                        {
+                            sw.WriteLine(linea);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al modificar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void Eliminar(Int32 id)
+        {
+            string archivoProveedor = @"../../Broker/Listado de aseguradores.csv";
+            List<string> lineas = new List<string>();
+
+            try
+            {
+                // Leer todas las líneas del archivo y guardarlas en una lista
+                using (StreamReader sr = new StreamReader(archivoProveedor))
+                {
+                    string readLine;
+                    while ((readLine = sr.ReadLine()) != null)
+                    {
+                        string[] separador = readLine.Split(';');
+
+                        if (separador.Length >= 1 && int.TryParse(separador[0], out int existingID))
+                        {
+                            // Si el ID coincide con el que deseamos eliminar, no lo agregamos a la lista
+                            if (existingID != id)
+                            {
+                                lineas.Add(readLine);
+                            }
+                        }
+                    }
+                }
+
+                // Sobreescribir el archivo con las líneas actualizadas
+                using (StreamWriter sw = new StreamWriter(archivoProveedor, false))
+                {
+                    foreach (string linea in lineas)
+                    {
+                        sw.WriteLine(linea);
+                    }
+                }
+
+                MessageBox.Show("Registro eliminado correctamente.", "Éxito", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el registro: " + ex.Message, "ERROR", MessageBoxButtons.OK);
+            }
+        }
     }
 }
