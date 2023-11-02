@@ -16,8 +16,6 @@ namespace pryArmanini_IE
         public static string Usuario { get; set; }
 
         OleDbConnection conexionBD;
-        OleDbCommand comandoBD;
-        OleDbDataReader lectorBD;
 
         string rutaArachivo;
         string cadenaConexion;

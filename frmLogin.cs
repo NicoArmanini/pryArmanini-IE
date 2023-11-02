@@ -38,7 +38,6 @@ namespace pryArmanini_IE
         {
             clsUsuarios objValidaUsuarios = new clsUsuarios();
             objValidaUsuarios.conectarBD();
-            lblTitulo.Text = objValidaUsuarios.estadoConexion;
 
             int contador = 0;
 
@@ -56,14 +55,13 @@ namespace pryArmanini_IE
 
                     clsUsuarios registrar = new clsUsuarios();
                     registrar.CargaLog(Usuario, fecha, Accion);
-
-                    frmMain frm = new frmMain();
-
-                    frm.Show();
-                    this.Hide();
                 }
                 string usuario = txtUsuario.Text;
                 clsUsuarios.Usuario = usuario;
+
+                frmMain frm = new frmMain();
+                frm.Show();
+                this.Hide();
             }
             else
             {
