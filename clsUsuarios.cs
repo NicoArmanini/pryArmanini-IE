@@ -86,7 +86,7 @@ namespace pryArmanini_IE
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO Logs (Usuario, FechaHora, Accion) VALUES (@Usuario, @Fecha, @Accion)";
+                    string query = "INSERT INTO Logs (Usuario, Fecha, Accion) VALUES (@Usuario, @Fecha, @Accion)";
 
                     using (OleDbCommand command = new OleDbCommand(query, connection))
                     {
@@ -121,7 +121,7 @@ namespace pryArmanini_IE
                     }
 
                     // Insertar los datos en la base de datos
-                    string Query = "INSERT INTO Usuarios (User, Contrasenia, PermisoProv, PermisoActiv, Firma) VALUES (@User, @Contrasena, @PermisoProv, @PermisoActiv, @Firma)";
+                    string Query = "INSERT INTO Usuarios (Nombre, Contrasenia, PermisoProv, Firma) VALUES (@Nombre, @Contrasenia, @PermisoProv, @Firma)";
 
                     using (OleDbCommand cmd = new OleDbCommand(Query, conn))
                     {
@@ -148,16 +148,16 @@ namespace pryArmanini_IE
             {
                 connection.Open();
 
-                string query = "SELECT IIF(permisoProv=true, 1, 0) AS permisoProv FROM Usuarios WHERE username = @Username";
+                string query = "SELECT IIF(permisoProv=true, 1, 0) AS permisoProv FROM Usuarios WHERE Nombre = @Nombre";
                 using (OleDbCommand command = new OleDbCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Username", usuarios);
+                    command.Parameters.AddWithValue("@Nombre", usuarios);
 
                     using (OleDbDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            permisos[0] = Convert.ToInt32(reader["permisoProv"]) == 1;
+                            permisos[0] = Convert.ToInt32(reader["PermisoProv"]) == 1;
                         }
                     }
                 }

@@ -17,7 +17,6 @@ namespace pryArmanini_IE
         {
             InitializeComponent();
             InitializeComponent();
-            this.usuario = usuario;
         }
 
 
@@ -108,7 +107,7 @@ namespace pryArmanini_IE
             frmRegistroUsuario frm = new frmRegistroUsuario();
 
             frm.Show();
-            //this.Hide();
+            this.Hide();
         }
     }
 }

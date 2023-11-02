@@ -50,18 +50,19 @@ namespace pryArmanini_IE
                     AD.Close();
 
                     string Usuario = txtUsuario.Text;
-                    DateTime fecha = DateTime.Now;
+                    DateTime Fecha = DateTime.Now;
                     string Accion = btnIniciar.Text;
 
                     clsUsuarios registrar = new clsUsuarios();
-                    registrar.CargaLog(Usuario, fecha, Accion);
+                    registrar.CargaLog(Usuario, Fecha, Accion);
+
+
+                    frmMain frm = new frmMain();
+                    frm.Show();
+                    this.Hide();
                 }
                 string usuario = txtUsuario.Text;
                 clsUsuarios.Usuario = usuario;
-
-                frmMain frm = new frmMain();
-                frm.Show();
-                this.Hide();
             }
             else
             {
