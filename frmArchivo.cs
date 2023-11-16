@@ -17,7 +17,6 @@ namespace pryArmanini_IE
         public frmArchivo()
         {
             InitializeComponent();
-            
         }
 
         // tuve problemas con traer el archivo al treeView y desplegar las carpetas, le prregunte a chatGPT como podia hacer
