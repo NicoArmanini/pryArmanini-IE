@@ -12,55 +12,37 @@ namespace pryArmanini_IE
 {
     internal class clsUsuarios
     {
-        public string Nombre { get; set; }
         public static string Usuario { get; set; }
-
-        OleDbConnection conexionBD;
 
         string rutaArachivo;
         string cadenaConexion;
-        public string estadoConexion;
+   
 
         public clsUsuarios()
         {
             rutaArachivo = @"../../Logs/BaseDatosLogs.accdb";
             cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + rutaArachivo;
-            estadoConexion = "CERRADO";
         }
 
-        public void conectarBD()
-        {
-            try
-            {
-                conexionBD = new OleDbConnection();
-                conexionBD.ConnectionString = cadenaConexion;
-                conexionBD.Open();
-                estadoConexion = "ABIERTO";
-            }
-            catch (Exception error) 
-            { 
-                estadoConexion = error.Message;
-            }
-        }
 
         public bool ValidarUsuario(string usuario, string contrasenia)
         {
-            using (OleDbConnection comandoBD = new OleDbConnection(cadenaConexion))
+            using (OleDbConnection conexion = new OleDbConnection(cadenaConexion))
             {
                 try
                 {
-                    comandoBD.Open();
-                    string query = "SELECT Nombre, Contrasenia FROM Usuarios WHERE Nombre = ?";
+                    conexion.Open();
+                    string query = "SELECT Usuario, Contrasenia FROM Usuarios WHERE Usuario = ?";
 
-                    using (OleDbCommand cmm = new OleDbCommand(query, conexionBD))
+                    using (OleDbCommand cmm = new OleDbCommand(query, conexion))
                     {
-                        cmm.Parameters.Add(new OleDbParameter("Nombre", usuario));
+                        cmm.Parameters.Add(new OleDbParameter("Usuario", usuario));
 
                         using (OleDbDataReader rdr = cmm.ExecuteReader())
                         {
                             if (rdr.Read())
                             {
-                                string usuarioBD = rdr["Nombre"].ToString();
+                                string usuarioBD = rdr["Usuario"].ToString();
                                 string contraseniaBD = rdr["Contrasenia"].ToString();
                                 return usuarioBD == usuario && contraseniaBD == contrasenia;
                             }
@@ -86,7 +68,7 @@ namespace pryArmanini_IE
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO Logs (Usuario, Fecha, Accion) VALUES (@Usuario, @Fecha, @Accion)";
+                    string query = "INSERT INTO Logs (Usuario, FechaHora, Accion) VALUES (@Usuario, @Fecha, @Accion)";
 
                     using (OleDbCommand command = new OleDbCommand(query, connection))
                     {
@@ -104,7 +86,7 @@ namespace pryArmanini_IE
             }
         }
 
-        public void AgregarUsuario(string usuario, string contrasenia, bool permisoProv, Image firma)
+        public void AgregarUsuario(string usuario, string contrasenia, string rol, Image firma)
         {
             try
             {
@@ -121,13 +103,13 @@ namespace pryArmanini_IE
                     }
 
                     // Insertar los datos en la base de datos
-                    string Query = "INSERT INTO Usuarios (Nombre, Contrasenia, PermisoProv, Firma) VALUES (@Nombre, @Contrasenia, @PermisoProv, @Firma)";
+                    string Query = "INSERT INTO Usuarios ([Usuario], [Contrasenia], Rol, Firma) VALUES (@Usuario, @Contrasenia, @Rol, @Firma)";
 
                     using (OleDbCommand cmd = new OleDbCommand(Query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@User", usuario);
+                        cmd.Parameters.AddWithValue("@Usuario", usuario);
                         cmd.Parameters.AddWithValue("@Contrasenia", contrasenia);
-                        cmd.Parameters.AddWithValue("@PermisoProv", permisoProv);
+                        cmd.Parameters.AddWithValue("@Rol", rol);
                         cmd.Parameters.AddWithValue("@Firma", firmaBytes);
 
                         cmd.ExecuteNonQuery();
@@ -140,30 +122,56 @@ namespace pryArmanini_IE
             }
         }
 
-        public bool[] ObtenerPermisos(string usuarios)
+        public string ObtenerRol()
         {
-            bool[] permisos = new bool[1]; // permisos en la base
-
-            using (OleDbConnection connection = new OleDbConnection(cadenaConexion))
+            try
             {
-                connection.Open();
+                string user = "";
+                string rol = "";
 
-                string query = "SELECT IIF(permisoProv=true, 1, 0) AS permisoProv FROM Usuarios WHERE Nombre = @Nombre";
-                using (OleDbCommand command = new OleDbCommand(query, connection))
+                using (OleDbConnection con = new OleDbConnection(cadenaConexion))
                 {
-                    command.Parameters.AddWithValue("@Nombre", usuarios);
+                    con.Open();
 
-                    using (OleDbDataReader reader = command.ExecuteReader())
+                    // Obtener el último usuario de los logs
+                    using (OleDbCommand cmd = new OleDbCommand("SELECT TOP 1 Usuario FROM Logs ORDER BY IdLogs DESC;", con))
+                    using (OleDbDataReader rdr = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (rdr.Read())
                         {
-                            permisos[0] = Convert.ToInt32(reader["PermisoProv"]) == 1;
+                            user = rdr["Usuario"].ToString();
                         }
                     }
-                }
-            }
 
-            return permisos;
+                    // Obtener el rol del usuario
+                    if (!string.IsNullOrEmpty(user))
+                    {
+                        using (OleDbCommand cmdB = new OleDbCommand("SELECT Rol FROM Usuarios WHERE Usuario = @Usuario;", con))
+                        {
+                            cmdB.Parameters.AddWithValue("@Usuario", user);
+
+                            using (OleDbDataReader rdrB = cmdB.ExecuteReader())
+                            {
+                                if (rdrB.Read())
+                                {
+                                    rol = rdrB["Rol"].ToString();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo encontrar el usuario en los registros de logs.", "ERROR", MessageBoxButtons.OK);
+                    }
+                }
+
+                return rol;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK);
+                return string.Empty;
+            }
         }
     }
 }

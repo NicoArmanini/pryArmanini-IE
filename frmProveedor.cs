@@ -49,11 +49,18 @@ namespace pryArmanini_IE
         private void frmProveedor_Load(object sender, EventArgs e)
         {
             // uso recursividad de clsRegistroProveedores
-            ObjP.CargarInfo(dgvTabla, cmbJusgado, cmbJurisdiccion, cmbLiquidador);
+            ObjP.CargarInfo(dgvTabla, cmbJusgado, cmbJurisdiccion, cmbLiquidador, cmbDireccion, cmbEntidad);
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            string Usuario = clsUsuarios.Usuario;
+            DateTime fecha = DateTime.Now;
+            string Accion = "REGISTRO AGREGAR";
+
+            clsUsuarios registro = new clsUsuarios();
+            registro.CargaLog(Usuario, fecha, Accion);
+
             //declaro variables 
             int numero = Convert.ToInt32(txtN.Text);
             string entidad = cmbEntidad.Text;
@@ -68,7 +75,7 @@ namespace pryArmanini_IE
             {
                 ObjP.Registrar(numero, entidad, apertura, expediente, juzgado, juris, direccion, liquidador);
                 dgvTabla.Rows.Clear();
-                ObjP.CargarInfo(dgvTabla, cmbJusgado, cmbJurisdiccion, cmbLiquidador);
+                ObjP.CargarInfo(dgvTabla, cmbJusgado, cmbJurisdiccion, cmbLiquidador, cmbEntidad, cmbDireccion);
                 btnRegistrar.Enabled = false;
                 Limpiar();
             }
@@ -80,33 +87,7 @@ namespace pryArmanini_IE
 
         private void dgvTabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow selectedRow = dgvTabla.Rows[e.RowIndex];
-
-                string numeroRegistro = selectedRow.Cells[0].Value.ToString();
-                string entidad = selectedRow.Cells[1].Value.ToString();
-                DateTime apertura = DateTime.Parse(selectedRow.Cells[2].Value.ToString());
-                string numExpediente = selectedRow.Cells[3].Value.ToString();
-                string juzgado = selectedRow.Cells[4].Value.ToString();
-                string jurisdiccion = selectedRow.Cells[5].Value.ToString();
-                string direccion = selectedRow.Cells[6].Value.ToString();
-                string responsable = selectedRow.Cells[7].Value.ToString();
-
-                txtN.Text = numeroRegistro;
-                cmbEntidad.Text = entidad;
-                dtpFecha.Value = apertura;
-                txtExpediente.Text = numExpediente;
-                cmbJusgado.Text = juzgado;
-                cmbJurisdiccion.Text = jurisdiccion;
-                cmbDireccion.Text = direccion;
-                cmbLiquidador.Text = responsable;
-
-                txtN.ReadOnly = true;
-                btnModificar.Enabled = true;
-                btnRegistrar.Enabled = false;
-                btnEliminar.Enabled = true;
-            }
+           
         }
 
         private void LimpiarGrilla()
@@ -138,7 +119,7 @@ namespace pryArmanini_IE
             {
                 ObjP.Modificar(numero, entidad, apertura, expediente, juzgado, juris, direccion, liqui);
                 LimpiarGrilla();
-                ObjP.CargarInfo(dgvTabla, cmbJusgado, cmbJurisdiccion, cmbLiquidador);
+                ObjP.CargarInfo(dgvTabla, cmbJusgado, cmbJurisdiccion, cmbLiquidador, cmbDireccion, cmbEntidad);
                 btnRegistrar.Enabled = false;
                 Limpiar();
             }
@@ -165,7 +146,7 @@ namespace pryArmanini_IE
             {
                 ObjP.Eliminar(numero);
                 LimpiarGrilla();
-                ObjP.CargarInfo(dgvTabla, cmbJusgado, cmbJurisdiccion, cmbLiquidador);
+                ObjP.CargarInfo(dgvTabla, cmbJusgado, cmbJurisdiccion, cmbLiquidador, cmbDireccion, cmbEntidad);
                 Limpiar();
             }
         }
@@ -180,6 +161,38 @@ namespace pryArmanini_IE
             registro.CargaLog(Usuario, fecha, Accion);
 
             Limpiar();
+        }
+
+        private void dgvTabla_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedRow = dgvTabla.Rows[e.RowIndex];
+
+                string numeroRegistro = selectedRow.Cells[0].Value.ToString();
+                string entidad = selectedRow.Cells[1].Value.ToString();
+                DateTime apertura = DateTime.Parse(selectedRow.Cells[2].Value.ToString());
+                string numExpediente = selectedRow.Cells[3].Value.ToString();
+                string juzgado = selectedRow.Cells[4].Value.ToString();
+                string jurisdiccion = selectedRow.Cells[5].Value.ToString();
+                string direccion = selectedRow.Cells[6].Value.ToString();
+                string responsable = selectedRow.Cells[7].Value.ToString();
+
+                txtN.Text = numeroRegistro;
+                cmbEntidad.Text = entidad;
+                dtpFecha.Value = apertura;
+                txtExpediente.Text = numExpediente;
+                cmbJusgado.Text = juzgado;
+                cmbJurisdiccion.Text = jurisdiccion;
+                cmbDireccion.Text = direccion;
+                cmbLiquidador.Text = responsable;
+
+                txtN.ReadOnly = true;
+                btnModificar.Enabled = true;
+                btnRegistrar.Enabled = false;
+                btnEliminar.Enabled = true;
+            }
         }
     }
 }

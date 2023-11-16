@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistroUsuario));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.optRegistro = new System.Windows.Forms.RadioButton();
+            this.cmbPermisos = new System.Windows.Forms.ComboBox();
             this.gpbFirma = new System.Windows.Forms.GroupBox();
             this.pbxFirma = new System.Windows.Forms.PictureBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -61,27 +61,27 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.optRegistro);
+            this.groupBox1.Controls.Add(this.cmbPermisos);
             this.groupBox1.Location = new System.Drawing.Point(309, 64);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(197, 67);
+            this.groupBox1.Size = new System.Drawing.Size(197, 73);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Permisos";
             // 
-            // optRegistro
+            // cmbPermisos
             // 
-            this.optRegistro.AutoSize = true;
-            this.optRegistro.Location = new System.Drawing.Point(8, 23);
-            this.optRegistro.Margin = new System.Windows.Forms.Padding(4);
-            this.optRegistro.Name = "optRegistro";
-            this.optRegistro.Size = new System.Drawing.Size(180, 20);
-            this.optRegistro.TabIndex = 20;
-            this.optRegistro.TabStop = true;
-            this.optRegistro.Text = "Registro de Proveedores";
-            this.optRegistro.UseVisualStyleBackColor = true;
+            this.cmbPermisos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPermisos.FormattingEnabled = true;
+            this.cmbPermisos.Items.AddRange(new object[] {
+            "Admin",
+            "Invitado"});
+            this.cmbPermisos.Location = new System.Drawing.Point(12, 26);
+            this.cmbPermisos.Name = "cmbPermisos";
+            this.cmbPermisos.Size = new System.Drawing.Size(169, 24);
+            this.cmbPermisos.TabIndex = 0;
             // 
             // gpbFirma
             // 
@@ -123,7 +123,6 @@
             // 
             // txtContra
             // 
-            this.txtContra.Enabled = false;
             this.txtContra.Location = new System.Drawing.Point(131, 115);
             this.txtContra.Margin = new System.Windows.Forms.Padding(4);
             this.txtContra.Name = "txtContra";
@@ -145,7 +144,6 @@
             // btnRegistrar
             // 
             this.btnRegistrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnRegistrar.Enabled = false;
             this.btnRegistrar.Location = new System.Drawing.Point(390, 203);
             this.btnRegistrar.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegistrar.Name = "btnRegistrar";
@@ -205,7 +203,6 @@
             this.Name = "frmRegistroUsuario";
             this.Text = "Registro Usuario";
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.gpbFirma.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxFirma)).EndInit();
             this.ResumeLayout(false);
@@ -217,7 +214,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton optRegistro;
         private System.Windows.Forms.GroupBox gpbFirma;
         private System.Windows.Forms.PictureBox pbxFirma;
         private System.Windows.Forms.Button btnLimpiar;
@@ -227,5 +223,6 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.ComboBox cmbPermisos;
     }
 }

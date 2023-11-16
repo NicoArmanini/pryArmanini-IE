@@ -31,12 +31,13 @@ namespace pryArmanini_IE
         {
             string usuario = txtUsuario.Text;
             string contrasenia = txtContra.Text;
-            bool permisoProv = optRegistro.Checked;
+            string rol = cmbPermisos.Text;
 
             Image firma = pbxFirma.Image;
 
             clsUsuarios registro = new clsUsuarios();
-            registro.AgregarUsuario(usuario, contrasenia, permisoProv, firma);
+            registro.AgregarUsuario(usuario, contrasenia, rol, firma);
+            this.Hide();
         }
 
         private void pbxFirma_MouseDown(object sender, MouseEventArgs e)

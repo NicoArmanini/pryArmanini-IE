@@ -12,22 +12,15 @@ namespace pryArmanini_IE
 {
     public partial class frmMain : Form
     {
-        private string usuario;
         public frmMain()
         {
             InitializeComponent();
-            InitializeComponent();
         }
 
-
-        int contador = 0;
         private void Hora_Tick(object sender, EventArgs e)
         {
-            contador += 1;
-            if (contador > 1)
-            {
-                toolHora.Text = Convert.ToString(DateTime.Now);
-            }
+            toolHora.Text = DateTime.Now.ToLongTimeString();
+            toolFecha.Text = DateTime.Now.ToLongDateString();
             toolUser.Text = clsUsuarios.Usuario;
         }
         private void toolRegistroProveedores_Click(object sender, EventArgs e)
@@ -76,13 +69,10 @@ namespace pryArmanini_IE
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            frmLogin frm = new frmLogin();
-            clsUsuarios lectorPermisos = new clsUsuarios();
+            clsUsuarios registro1 = new clsUsuarios();
+            string rolUsuario = registro1.ObtenerRol();
 
-            bool[] permisos = lectorPermisos.ObtenerPermisos(frm.txtUsuario.Text);
-            bool tienePermiso = permisos.Any(p => p);
-
-            if (tienePermiso)
+            if (rolUsuario == "Admin")
             {
                 // Habilita el botón
                 toolGestion.Enabled = true;

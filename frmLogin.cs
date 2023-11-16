@@ -34,41 +34,36 @@ namespace pryArmanini_IE
             }
         }
 
+        clsUsuarios validar = new clsUsuarios();
+        int contador = 0;
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            clsUsuarios objValidaUsuarios = new clsUsuarios();
-            objValidaUsuarios.conectarBD();
-
-            int contador = 0;
-
-            if (contador < 3)
+            if (validar.ValidarUsuario(txtUsuario.Text, txtContrasenia.Text))
             {
-                if (objValidaUsuarios.ValidarUsuario(txtUsuario.Text, txtContrasenia.Text))
-                {
-                    StreamWriter AD = new StreamWriter("logInicio", true);
-                    AD.WriteLine(txtUsuario.Text + "-Fecha-" + DateTime.Now + btnIniciar.Text);
-                    AD.Close();
+                string Usuario = txtUsuario.Text;
+                DateTime fecha = DateTime.Now;
+                string Accion = btnIniciar.Text;
 
-                    string Usuario = txtUsuario.Text;
-                    DateTime Fecha = DateTime.Now;
-                    string Accion = btnIniciar.Text;
+                clsUsuarios registro = new clsUsuarios();
+                registro.CargaLog(Usuario, fecha, Accion);
 
-                    clsUsuarios registrar = new clsUsuarios();
-                    registrar.CargaLog(Usuario, Fecha, Accion);
-
-
-                    frmMain frm = new frmMain();
-                    frm.Show();
-                    this.Hide();
-                }
-                string usuario = txtUsuario.Text;
-                clsUsuarios.Usuario = usuario;
+                frmMain frm = new frmMain();
+                frm.Show();
+                this.Hide();
             }
             else
             {
-                MessageBox.Show("Ha alcanzado el límite de intentos incorrectos. El formulario se cerrará.", "ERROR", MessageBoxButtons.OK);
-                this.Close();
+                contador++;
+                MessageBox.Show("Usuario o contraseña incorrecta");
+                if (contador == 3)
+                {
+                    MessageBox.Show("Demasiados intentos");
+                    this.Close();
+                }
             }
+            //permisos 
+            string usuario = txtUsuario.Text;
+            clsUsuarios.Usuario = usuario;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

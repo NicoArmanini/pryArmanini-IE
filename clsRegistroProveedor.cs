@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,53 +11,68 @@ namespace pryArmanini_IE
 {
     internal class clsRegistroProveedor
     {
-        // lee el archivo y carga en los cmb
-        public void CargarInfo(DataGridView grilla, ComboBox cmbJuzgado, ComboBox cmbJurisdiccion, ComboBox cmbLiquidador)
+        string rutaArachivo;
+        
+        public clsRegistroProveedor()
         {
-            string archivoProveedor = "Listado de aseguradores.csv";
+            rutaArachivo = @"../../Logs/Listado de aseguradores.csv";
+        }
+
+        // lee el archivo y carga en los cmb
+
+        public void CargarInfo(DataGridView grilla, ComboBox cmbJuzg, ComboBox cmbJuri, ComboBox cmbLiqui, ComboBox cmbEntidad, ComboBox cmbDireccion)
+        {
 
             try
             {
-
-                using (StreamReader sr = new StreamReader(archivoProveedor))
+                using (StreamReader sr = new StreamReader(rutaArachivo))
                 {
                     string readLine = sr.ReadLine();
                     if (readLine != null)
                     {
                         string[] separador = readLine.Split(';');
-
-                        // HashSet para cargar los combo
+                        //foreach (string columna in separador)
+                        //{
+                        //    grilla.Columns.Add(columna, columna);
+                        //}
                         HashSet<string> jurisdicciones = new HashSet<string>();
                         HashSet<string> responsables = new HashSet<string>();
                         HashSet<string> juzgados = new HashSet<string>();
 
                         while (!sr.EndOfStream)
                         {
-                            
+                            //readLine = sr.ReadLine();
                             separador = readLine.Split(';');
                             grilla.Rows.Add(separador);
 
                             juzgados.Add(separador[4]);
                             jurisdicciones.Add(separador[5]);
                             responsables.Add(separador[7]);
-
                             readLine = sr.ReadLine();
 
                         }
-                        // agrego los datos a los cmb
+
                         foreach (string jurisdiccion in jurisdicciones)
                         {
-                            cmbJurisdiccion.Items.Add(jurisdiccion);
+                            cmbJuri.Items.Add(jurisdiccion);
                         }
 
                         foreach (string juzgado in juzgados)
                         {
-                            cmbJuzgado.Items.Add(juzgado);
+                            cmbJuzg.Items.Add(juzgado);
                         }
 
                         foreach (string liquida in responsables)
                         {
-                            cmbLiquidador.Items.Add(liquida);
+                            cmbLiqui.Items.Add(liquida);
+                        }
+                        foreach (string liquida in responsables)
+                        {
+                            cmbEntidad.Items.Add(liquida);
+                        }
+                        foreach (string liquida in responsables)
+                        {
+                            cmbDireccion.Items.Add(liquida);
                         }
                     }
                 }
@@ -69,14 +85,12 @@ namespace pryArmanini_IE
         }
         public void Registrar(Int32 id, string entidad, string apertura, string expediente, string juzgado, string jurisdiccion, string direccion, string liquidador)
         {
-            string archivoProveedor = "Listado de aseguradores.csv";
-
             try
             {
                 // Crear una lista para almacenar los IDs existentes en el archivo
                 List<int> idsExistentes = new List<int>();
 
-                using (StreamReader sr = new StreamReader(archivoProveedor))
+                using (StreamReader sr = new StreamReader(rutaArachivo))
                 {
                     string readLine;
                     while ((readLine = sr.ReadLine()) != null)
@@ -97,7 +111,7 @@ namespace pryArmanini_IE
                 {
                     string nuevoRegistro = $"{id};{entidad};{apertura};{expediente};{juzgado};{jurisdiccion};{direccion};{liquidador}";
 
-                    using (StreamWriter sw = new StreamWriter(archivoProveedor, true))
+                    using (StreamWriter sw = new StreamWriter(rutaArachivo, true))
                     {
                         sw.WriteLine(nuevoRegistro);
                     }
@@ -115,14 +129,12 @@ namespace pryArmanini_IE
 
         public void Modificar(int id, string entidad, string apertura, string expediente, string juzg, string juri, string direccion, string liquidador)
         {
-            string archivoProveedor = @"../../Broker/Listado de aseguradores.csv";
-
             try
             {
                 List<string> lineas = new List<string>();
                 bool primerLinea = true;
 
-                using (StreamReader lector = new StreamReader(archivoProveedor))
+                using (StreamReader lector = new StreamReader(rutaArachivo))
                 {
                     string readLine;
                     while ((readLine = lector.ReadLine()) != null)
@@ -145,7 +157,7 @@ namespace pryArmanini_IE
                 }
 
                 // Escribe las líneas en el archivo original
-                using (StreamWriter sw = new StreamWriter(archivoProveedor, false))
+                using (StreamWriter sw = new StreamWriter(rutaArachivo, false))
                 {
                     foreach (string linea in lineas)
                     {
@@ -170,13 +182,12 @@ namespace pryArmanini_IE
 
         public void Eliminar(Int32 id)
         {
-            string archivoProveedor = @"../../Broker/Listado de aseguradores.csv";
             List<string> lineas = new List<string>();
 
             try
             {
                 // Leer todas las líneas del archivo y guardarlas en una lista
-                using (StreamReader sr = new StreamReader(archivoProveedor))
+                using (StreamReader sr = new StreamReader(rutaArachivo))
                 {
                     string readLine;
                     while ((readLine = sr.ReadLine()) != null)
@@ -195,7 +206,7 @@ namespace pryArmanini_IE
                 }
 
                 // Sobreescribir el archivo con las líneas actualizadas
-                using (StreamWriter sw = new StreamWriter(archivoProveedor, false))
+                using (StreamWriter sw = new StreamWriter(rutaArachivo, false))
                 {
                     foreach (string linea in lineas)
                     {

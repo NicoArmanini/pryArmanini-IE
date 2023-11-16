@@ -51,8 +51,16 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.dgvTabla = new System.Windows.Forms.DataGridView();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.dgvTabla = new System.Windows.Forms.DataGridView();
+            this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apertura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Expediente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.juzgado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.jurisdiccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Liquidador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mrcDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabla)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +70,7 @@
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(241, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(343, 13);
             this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(549, 42);
@@ -88,7 +96,7 @@
             this.mrcDatos.Controls.Add(this.lblApertura);
             this.mrcDatos.Controls.Add(this.lblEntidad);
             this.mrcDatos.Controls.Add(this.lblN);
-            this.mrcDatos.Location = new System.Drawing.Point(27, 81);
+            this.mrcDatos.Location = new System.Drawing.Point(129, 85);
             this.mrcDatos.Margin = new System.Windows.Forms.Padding(4);
             this.mrcDatos.Name = "mrcDatos";
             this.mrcDatos.Padding = new System.Windows.Forms.Padding(4);
@@ -99,6 +107,7 @@
             // 
             // cmbLiquidador
             // 
+            this.cmbLiquidador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLiquidador.FormattingEnabled = true;
             this.cmbLiquidador.Location = new System.Drawing.Point(594, 198);
             this.cmbLiquidador.Margin = new System.Windows.Forms.Padding(4);
@@ -108,6 +117,7 @@
             // 
             // cmbDireccion
             // 
+            this.cmbDireccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDireccion.FormattingEnabled = true;
             this.cmbDireccion.Location = new System.Drawing.Point(594, 145);
             this.cmbDireccion.Margin = new System.Windows.Forms.Padding(4);
@@ -117,6 +127,7 @@
             // 
             // cmbEntidad
             // 
+            this.cmbEntidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEntidad.FormattingEnabled = true;
             this.cmbEntidad.Location = new System.Drawing.Point(131, 95);
             this.cmbEntidad.Margin = new System.Windows.Forms.Padding(4);
@@ -126,6 +137,7 @@
             // 
             // cmbJurisdiccion
             // 
+            this.cmbJurisdiccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbJurisdiccion.FormattingEnabled = true;
             this.cmbJurisdiccion.Location = new System.Drawing.Point(594, 100);
             this.cmbJurisdiccion.Margin = new System.Windows.Forms.Padding(4);
@@ -135,6 +147,7 @@
             // 
             // cmbJusgado
             // 
+            this.cmbJusgado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbJusgado.FormattingEnabled = true;
             this.cmbJusgado.Location = new System.Drawing.Point(594, 54);
             this.cmbJusgado.Margin = new System.Windows.Forms.Padding(4);
@@ -249,7 +262,7 @@
             // btnRegistrar
             // 
             this.btnRegistrar.BackColor = System.Drawing.Color.Lime;
-            this.btnRegistrar.Location = new System.Drawing.Point(863, 83);
+            this.btnRegistrar.Location = new System.Drawing.Point(965, 87);
             this.btnRegistrar.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(113, 57);
@@ -261,7 +274,7 @@
             // btnModificar
             // 
             this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnModificar.Location = new System.Drawing.Point(863, 142);
+            this.btnModificar.Location = new System.Drawing.Point(965, 146);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(113, 57);
@@ -273,7 +286,7 @@
             // btnEliminar
             // 
             this.btnEliminar.BackColor = System.Drawing.Color.Red;
-            this.btnEliminar.Location = new System.Drawing.Point(863, 201);
+            this.btnEliminar.Location = new System.Drawing.Point(965, 205);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(113, 57);
@@ -285,7 +298,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnLimpiar.Location = new System.Drawing.Point(863, 291);
+            this.btnLimpiar.Location = new System.Drawing.Point(965, 295);
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(113, 39);
@@ -294,21 +307,9 @@
             this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // dgvTabla
-            // 
-            this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTabla.Location = new System.Drawing.Point(27, 338);
-            this.dgvTabla.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvTabla.Name = "dgvTabla";
-            this.dgvTabla.RowHeadersWidth = 51;
-            this.dgvTabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTabla.Size = new System.Drawing.Size(949, 266);
-            this.dgvTabla.TabIndex = 6;
-            this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
-            // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(891, 610);
+            this.btnSalir.Location = new System.Drawing.Point(1199, 780);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(85, 32);
@@ -317,14 +318,92 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // dgvTabla
+            // 
+            this.dgvTabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTabla.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.numero,
+            this.Entidad,
+            this.Apertura,
+            this.Expediente,
+            this.juzgado,
+            this.jurisdiccion,
+            this.Direccion,
+            this.Liquidador});
+            this.dgvTabla.Location = new System.Drawing.Point(33, 354);
+            this.dgvTabla.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvTabla.Name = "dgvTabla";
+            this.dgvTabla.RowHeadersWidth = 51;
+            this.dgvTabla.Size = new System.Drawing.Size(1125, 458);
+            this.dgvTabla.TabIndex = 10;
+            this.dgvTabla.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellClick);
+            this.dgvTabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabla_CellContentClick);
+            // 
+            // numero
+            // 
+            this.numero.HeaderText = "N";
+            this.numero.MinimumWidth = 6;
+            this.numero.Name = "numero";
+            this.numero.Width = 125;
+            // 
+            // Entidad
+            // 
+            this.Entidad.HeaderText = "Entidad";
+            this.Entidad.MinimumWidth = 6;
+            this.Entidad.Name = "Entidad";
+            this.Entidad.Width = 125;
+            // 
+            // Apertura
+            // 
+            this.Apertura.HeaderText = "Apertura";
+            this.Apertura.MinimumWidth = 6;
+            this.Apertura.Name = "Apertura";
+            this.Apertura.Width = 125;
+            // 
+            // Expediente
+            // 
+            this.Expediente.HeaderText = "N expediente";
+            this.Expediente.MinimumWidth = 6;
+            this.Expediente.Name = "Expediente";
+            this.Expediente.Width = 125;
+            // 
+            // juzgado
+            // 
+            this.juzgado.HeaderText = "Juzgado";
+            this.juzgado.MinimumWidth = 6;
+            this.juzgado.Name = "juzgado";
+            this.juzgado.Width = 125;
+            // 
+            // jurisdiccion
+            // 
+            this.jurisdiccion.HeaderText = "Jurisdiccion";
+            this.jurisdiccion.MinimumWidth = 6;
+            this.jurisdiccion.Name = "jurisdiccion";
+            this.jurisdiccion.Width = 125;
+            // 
+            // Direccion
+            // 
+            this.Direccion.HeaderText = "Direccion";
+            this.Direccion.MinimumWidth = 6;
+            this.Direccion.Name = "Direccion";
+            this.Direccion.Width = 125;
+            // 
+            // Liquidador
+            // 
+            this.Liquidador.HeaderText = "Liquidador Responsable";
+            this.Liquidador.MinimumWidth = 6;
+            this.Liquidador.Name = "Liquidador";
+            this.Liquidador.Width = 125;
+            // 
             // frmProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::pryArmanini_IE.Properties.Resources.fondo;
-            this.ClientSize = new System.Drawing.Size(1007, 650);
-            this.Controls.Add(this.btnSalir);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1296, 825);
             this.Controls.Add(this.dgvTabla);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
@@ -361,7 +440,6 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.DataGridView dgvTabla;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ComboBox cmbJusgado;
         private System.Windows.Forms.DateTimePicker dtpFecha;
@@ -370,5 +448,14 @@
         private System.Windows.Forms.ComboBox cmbEntidad;
         private System.Windows.Forms.ComboBox cmbJurisdiccion;
         private System.Windows.Forms.Label lblJurisdiccion;
+        private System.Windows.Forms.DataGridView dgvTabla;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Entidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apertura;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Expediente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn juzgado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn jurisdiccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Liquidador;
     }
 }
